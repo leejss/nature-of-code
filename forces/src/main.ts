@@ -1,24 +1,38 @@
-import './style.css'
-import typescriptLogo from './typescript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.ts'
+import { Ball } from "./ball";
+import { canvas, ctx } from "./canvas";
+import { Vector } from "./vector";
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`
+const body = document.body;
+body.appendChild(canvas);
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+// 공 생성 (x, y, 질량)
+const ball = new Ball(window.innerWidth / 2, window.innerHeight / 2, 20);
+
+// 중력 벡터 생성
+const gravity = new Vector(0, 0.2);
+
+// 바람 벡터 (가끔 적용할 수 있음)
+const wind = new Vector(0.1, 0);
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // 공에 중력 적용
+  ball.applyForce(gravity);
+
+  // 가끔 바람 적용 (랜덤하게)
+  if (Math.random() < 0.05) {
+    ball.applyForce(wind);
+  }
+
+  // 공 업데이트 및 화면 경계 체크
+  ball.update();
+  ball.checkEdge(window.innerWidth, window.innerHeight);
+
+  // 공 표시
+  ball.display(ctx);
+
+  requestAnimationFrame(draw);
+}
+
+draw();
