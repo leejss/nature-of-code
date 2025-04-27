@@ -1,10 +1,10 @@
 import { Vector } from "./vector";
 
 export class Ball {
-  private readonly position: Vector;
-  private readonly velocity: Vector;
-  private readonly acceleration: Vector;
-  private readonly mass: number;
+  position: Vector;
+  velocity: Vector;
+  acceleration: Vector;
+  mass: number;
 
   constructor(x: number, y: number, mass: number) {
     this.position = new Vector(x, y); // position
@@ -54,5 +54,12 @@ export class Ball {
     ctx.fillStyle = "#000";
     ctx.fill();
     ctx.closePath();
+  }
+
+  contactEdge(height: number) {
+    if (this.position.y > height) {
+      this.position.y = height;
+      this.velocity.y *= -1;
+    }
   }
 }
