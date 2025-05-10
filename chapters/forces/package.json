@@ -1,5 +1,5 @@
 {
-  "name": "vector",
+  "name": "forces",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,6 +7,9 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview"
+  },
+  "dependencies": {
+    "@noc/common": "workspace:*"
   },
   "devDependencies": {
     "typescript": "~5.7.2",

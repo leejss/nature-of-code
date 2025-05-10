@@ -1,37 +1,20 @@
+import { CanvasManager } from '@noc/common';
 import { Mover } from "./mover";
 import { Vector } from "./vector";
 import { Vehicle } from "./Vehicle";
 import { Walker } from "./walker";
 
-const canvas = document.getElementById("canvas") as HTMLCanvasElement;
-const ctx = canvas.getContext("2d")!;
-const dpr = window.devicePixelRatio || 1;
+// 공통 모듈 사용하여 캔버스 매니저 인스턴스 생성
+const canvasManager = new CanvasManager("canvas");
+const { ctx, canvas, width, height } = canvasManager;
 
-canvas.width = window.innerWidth * dpr;
-canvas.height = window.innerHeight * dpr;
-ctx.scale(dpr, dpr);
-canvas.style.width = `${window.innerWidth}px`;
-canvas.style.height = `${window.innerHeight}px`;
-const width = window.innerWidth;
-const height = window.innerHeight;
-
-// CSS로 설정된 크기 유지하기 위해 스타일 조정
-// canvas.style.width = `${window.innerWidth}px`;
-// canvas.style.height = `${window.innerHeight}px`;
+// 마우스 위치 추적 설정
+const mousePos = canvasManager.setupMouseTracking();
 
 const mover = new Mover(width / 2, height / 2);
 const gravity = new Vector(0, 0.1);
 const walker = new Walker(width / 2, height / 2);
 
-let mouseX = width / 2;
-let mouseY = height / 2;
-
-canvas.addEventListener("mousemove", (e) => {
-  const rect = canvas.getBoundingClientRect();
-  mouseX = e.clientX - rect.left;
-  mouseY = e.clientY - rect.top;
-});
-const vehicles: Vehicle[] = [];
 // 다양한 색상 배열 정의
 const colors = [
   "#FF5252", // 빨강
@@ -46,6 +29,7 @@ const colors = [
   "#5D4037", // 갈색
 ];
 
+const vehicles: Vehicle[] = [];
 for (let i = 0; i < 10; i++) {
   const v = new Vehicle(Math.random() * width, Math.random() * height);
   v.maxSpeed = 2 + Math.random() * 3; // 2~5 사이의 속도
@@ -56,8 +40,8 @@ for (let i = 0; i < 10; i++) {
 }
 
 function draw() {
-  ctx.fillStyle = "#242424";
-  ctx.fillRect(0, 0, width, height);
+  // 캔버스 초기화
+  canvasManager.clear("#242424");
 
   // mover.applyForce(gravity);
   // mover.update();
@@ -67,16 +51,20 @@ function draw() {
   // walker.step();
   // walker.display(ctx);
 
+  // 마우스 포인터 표시
   ctx.beginPath();
-  ctx.arc(mouseX, mouseY, 5, 0, Math.PI * 2);
+  ctx.arc(mousePos.x, mousePos.y, 5, 0, Math.PI * 2);
   ctx.fillStyle = "red";
   ctx.fill();
+  
+  // Vehicle 업데이트 및 표시
   vehicles.forEach((vehicle) => {
-    const target = new Vector(mouseX, mouseY);
+    const target = new Vector(mousePos.x, mousePos.y);
     vehicle.seek(target);
     vehicle.update();
     vehicle.display(ctx);
   });
+  
   requestAnimationFrame(draw);
 }
 

@@ -1,0 +1,16 @@
+{
+  "name": "nature-of-code",
+  "private": true,
+  "version": "1.0.0",
+  "description": "자연을 모방한 코드 시뮬레이션 모음",
+  "scripts": {
+    "dev": "pnpm --filter $npm_config_chapter dev",
+    "build": "pnpm --filter $npm_config_chapter build",
+    "preview": "pnpm --filter $npm_config_chapter preview",
+    "build:all": "pnpm -r build",
+    "dev:all": "pnpm -r dev"
+  },
+  "keywords": ["physics", "simulation"],
+  "author": "",
+  "license": "MIT"
+}
