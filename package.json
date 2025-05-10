@@ -4,11 +4,13 @@
   "version": "1.0.0",
   "description": "자연을 모방한 코드 시뮬레이션 모음",
   "scripts": {
-    "dev": "pnpm --filter $npm_config_chapter dev",
-    "build": "pnpm --filter $npm_config_chapter build",
-    "preview": "pnpm --filter $npm_config_chapter preview",
+    "dev": "pnpm --filter vector dev",
+    "dev:forces": "pnpm --filter forces dev",
+    "build:vector": "pnpm --filter vector build",
+    "build:forces": "pnpm --filter forces build",
     "build:all": "pnpm -r build",
-    "dev:all": "pnpm -r dev"
+    "setup": "pnpm --filter @noc/common build && pnpm -r build",
+    "watch:common": "pnpm --filter @noc/common dev"
   },
   "keywords": ["physics", "simulation"],
   "author": "",

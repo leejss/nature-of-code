@@ -1,4 +1,4 @@
-import { CanvasManager } from '@noc/common';
+import { CanvasManager } from "@noc/common";
 import { Mover } from "./mover";
 import { Vector } from "./vector";
 import { Vehicle } from "./Vehicle";
@@ -56,7 +56,7 @@ function draw() {
   ctx.arc(mousePos.x, mousePos.y, 5, 0, Math.PI * 2);
   ctx.fillStyle = "red";
   ctx.fill();
-  
+
   // Vehicle 업데이트 및 표시
   vehicles.forEach((vehicle) => {
     const target = new Vector(mousePos.x, mousePos.y);
@@ -64,7 +64,7 @@ function draw() {
     vehicle.update();
     vehicle.display(ctx);
   });
-  
+
   requestAnimationFrame(draw);
 }
 
