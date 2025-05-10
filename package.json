@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "자연을 모방한 코드 시뮬레이션 모음",
   "scripts": {
-    "dev": "pnpm --filter vector dev",
+    "dev:vector": "pnpm --filter vector dev",
     "dev:forces": "pnpm --filter forces dev",
     "build:vector": "pnpm --filter vector build",
     "build:forces": "pnpm --filter forces build",
@@ -12,7 +12,14 @@
     "setup": "pnpm --filter @noc/common build && pnpm -r build",
     "watch:common": "pnpm --filter @noc/common dev"
   },
-  "keywords": ["physics", "simulation"],
+  "keywords": [
+    "physics",
+    "simulation"
+  ],
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "~5.7.2",
+    "vite": "^6.3.1"
+  }
 }

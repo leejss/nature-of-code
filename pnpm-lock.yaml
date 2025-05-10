@@ -6,39 +6,28 @@ settings:
 
 importers:
 
-  .: {}
+  .:
+    devDependencies:
+      typescript:
+        specifier: ~5.7.2
+        version: 5.7.3
+      vite:
+        specifier: ^6.3.1
+        version: 6.3.5
 
   chapters/forces:
     dependencies:
       '@noc/common':
         specifier: workspace:*
         version: link:../../packages/common
-    devDependencies:
-      typescript:
-        specifier: ~5.7.2
-        version: 5.7.3
-      vite:
-        specifier: ^6.3.1
-        version: 6.3.5
 
   chapters/vector:
     dependencies:
       '@noc/common':
         specifier: workspace:*
         version: link:../../packages/common
-    devDependencies:
-      typescript:
-        specifier: ~5.7.2
-        version: 5.7.3
-      vite:
-        specifier: ^6.3.1
-        version: 6.3.5
 
-  packages/common:
-    devDependencies:
-      typescript:
-        specifier: ~5.7.2
-        version: 5.7.3
+  packages/common: {}
 
 packages:
 
